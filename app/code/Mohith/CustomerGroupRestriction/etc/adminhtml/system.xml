@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mohith" translate="label" sortOrder="10">
+            <label>Mohith</label>
+        </tab>
+        <section id="user_group_restriction" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>UserGroupRestriction</label>
+            <tab>mohith</tab>
+            <resource>Mohith_CustomerGroupRestriction::CustomerGroupRestriction_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable UserGroup Restriction</comment>
+                </field>
+                <field id="customer_group" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Select Customer Group and Pages to Restrict</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                    <frontend_model>Mohith\CustomerGroupRestriction\Block\Adminhtml\Form\Field\CustomerGroupConfig</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Select the customer groups and pages to restrict</comment>
+                </field>
+                <field id="redirect" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Enable Custom Redirect</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable to add custom redirect Else it will redirect to the home page</comment>
+                </field>
+                <field id="customer_group_redirect" translate="label" sortOrder="40" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Select Customer Group and Redirect URL</label>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="redirect">1</field>
+                    </depends>
+                    <frontend_model>Mohith\CustomerGroupRestriction\Block\Adminhtml\Form\Field\CustomerGroupRedirectConfig</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Select the customer groups and Enter the Redirection URL (If there is no entry it will redirect to Home Page). If the restriction is imposed on CMS pages kindly do not add the CMS page URL for the redirect URL</comment>                </field>
+            </group>
+        </section>
+    </system>
+</config>
